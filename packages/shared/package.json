@@ -1,0 +1,19 @@
+{
+	"name": "@harnesses-on-do/shared",
+	"private": true,
+	"type": "module",
+	"exports": {
+		"./config": "./src/config.ts",
+		"./meter": "./src/meter.ts",
+		"./metering": "./src/metering.ts",
+		"./tracing": "./src/tracing.ts"
+	},
+	"scripts": {
+		"typecheck": "tsc --noEmit"
+	},
+	"devDependencies": {
+		"@cloudflare/workers-types": "^5.20261109.1",
+		"typescript": "^6.0.3",
+		"vitest": "^5.1.0"
+	}
+}

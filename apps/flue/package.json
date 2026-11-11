@@ -1,0 +1,27 @@
+{
+	"name": "@harnesses-on-do/flue",
+	"private": true,
+	"type": "module",
+	"scripts": {
+		"dev": "CLOUDFLARE_DEV_REGISTRY_PATH=../../.wrangler/dev-registry vite dev --port 5174 --strictPort",
+		"build": "vite build",
+		"deploy": "vite build && wrangler deploy",
+		"typecheck": "tsc --noEmit",
+		"types": "wrangler types env.d.ts --include-runtime false"
+	},
+	"dependencies": {
+		"@cloudflare/computer": "^0.10.0",
+		"@flue/runtime": "2.3.0",
+		"@platformatic/vfs": "^0.4.1",
+		"@harnesses-on-do/shared": "workspace:*",
+		"hono": "^4.13.17"
+	},
+	"devDependencies": {
+		"@cloudflare/vite-plugin": "^1.68.0",
+		"@cloudflare/workers-types": "^5.20261109.1",
+		"@flue/vite": "2.3.0",
+		"typescript": "^6.0.3",
+		"vite": "^8.3.7",
+		"wrangler": "^4.159.0"
+	}
+}

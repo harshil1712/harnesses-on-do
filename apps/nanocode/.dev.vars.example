@@ -1,0 +1,3 @@
+# Your Cloudflare account ID: Nanocode sends Workers AI requests through AI Gateway with it.
+# Copy to .dev.vars. In production: npx wrangler secret put WORKERS_AI_ACCOUNT_ID
+WORKERS_AI_ACCOUNT_ID=

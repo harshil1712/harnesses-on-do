@@ -1,0 +1,41 @@
+{
+	"$schema": "./node_modules/wrangler/config-schema.json",
+	"name": "harnesses-on-do",
+	"main": "src/server.ts",
+	"upload_source_maps": true,
+	"compatibility_date": "2026-11-10",
+	"compatibility_flags": ["nodejs_compat"],
+	"ai": { "binding": "AI", "remote": true },
+	// Dynamic Workers for the Computer workspace's `exec` tool.
+	"worker_loaders": [{ "binding": "LOADER" }],
+	"assets": {
+		"not_found_handling": "single-page-application",
+		"run_worker_first": ["/api/*", "/agents/*"],
+	},
+	"durable_objects": {
+		"bindings": [
+			{ "name": "Metering", "class_name": "Metering" },
+			{ "name": "PiAgent", "class_name": "PiAgent" },
+			{ "name": "ThinkAgent", "class_name": "ThinkAgent" },
+			{ "name": "OpenCodeAgent", "class_name": "OpenCodeAgent" },
+			{ "name": "SelfModifyingHarness", "class_name": "SelfModifyingHarnessObject" },
+			{ "name": "Coder", "class_name": "Coder" },
+		],
+	},
+	"migrations": [
+		{ "tag": "v1", "new_sqlite_classes": ["Metering", "PiAgent"] },
+		{ "tag": "v2", "new_sqlite_classes": ["ThinkAgent"] },
+		{ "tag": "v3", "new_sqlite_classes": ["OpenCodeAgent"] },
+		{ "tag": "v4", "new_sqlite_classes": ["SelfModifyingHarnessObject"] },
+		{ "tag": "v5", "new_sqlite_classes": ["Coder"] },
+	],
+	// External harness Workers: each owns its build, so it runs as its own Worker.
+	"services": [
+		{ "binding": "FLUE", "service": "harnesses-on-do-flue" },
+		{ "binding": "NANOCODE", "service": "harnesses-on-do-nanocode" },
+	],
+	"observability": {
+		"enabled": true,
+		"traces": { "enabled": true },
+	},
+}

@@ -1,0 +1,34 @@
+{
+	"name": "harnesses-on-do",
+	"version": "0.0.0",
+	"private": true,
+	"description": "Agent harnesses running in Cloudflare Durable Objects, side by side with comparable metrics.",
+	"license": "MIT",
+	"author": "Harshil Agrawal",
+	"type": "module",
+	"packageManager": "pnpm@12.18.0",
+	"engines": {
+		"node": ">=22.19.0"
+	},
+	"scripts": {
+		"dev": "pnpm -r --parallel --filter './apps/*' dev",
+		"build": "pnpm -r build",
+		"deploy": "pnpm --filter @harnesses-on-do/flue --filter @harnesses-on-do/nanocode run deploy && pnpm --filter @harnesses-on-do/web run deploy",
+		"typecheck": "pnpm -r typecheck",
+		"lint": "eslint .",
+		"format": "prettier --write .",
+		"format:check": "prettier --check .",
+		"test": "vitest run",
+		"check": "pnpm typecheck && pnpm lint && pnpm format:check && pnpm test"
+	},
+	"devDependencies": {
+		"@eslint/js": "^10.0.1",
+		"eslint": "^10.14.0",
+		"eslint-plugin-react-hooks": "^7.1.1",
+		"globals": "^17.14.0",
+		"prettier": "^3.9.10",
+		"typescript": "^6.0.3",
+		"typescript-eslint": "^8.72.1",
+		"vitest": "^5.1.0"
+	}
+}

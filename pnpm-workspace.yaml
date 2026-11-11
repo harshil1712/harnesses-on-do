@@ -1,0 +1,58 @@
+packages:
+  - apps/*
+  - packages/*
+
+# Pre-approve build scripts: `workerd` downloads the platform binary and
+# `esbuild` downloads/builds native bindings. Without these, pnpm 11+ aborts
+# the install with ERR_PNPM_IGNORED_BUILDS.
+allowBuilds:
+  esbuild: true
+  workerd: true
+  # Not needed at runtime (transitive deps of pi-ai); skip their scripts.
+  '@google/genai': false
+  core-js-pure: false
+  protobufjs: false
+  # Optional native compression for just-bash (agents peer); not used in Workers.
+  '@mongodb-js/zstd': false
+  node-liblzma: false
+  # Native helpers of OpenCode's Node profile; the Workers profile does not use them.
+  '@parcel/watcher': false
+  msgpackr-extract: false
+  tree-sitter-bash: false
+  tree-sitter-powershell: false
+
+minimumReleaseAgeExclude:
+  - '@cloudflare/kumo@2.18.0'
+  - '@cloudflare/vite-plugin@1.68.0'
+  - '@cloudflare/workerd-darwin-64@1.20261109.1'
+  - '@cloudflare/workerd-darwin-arm64@1.20261109.1'
+  - '@cloudflare/workerd-linux-64@1.20261109.1'
+  - '@cloudflare/workerd-linux-arm64@1.20261109.1'
+  - '@cloudflare/workerd-windows-64@1.20261109.1'
+  - '@cloudflare/workers-types@5.20261109.1'
+  - '@rolldown/binding-android-arm-eabi@1.2.18'
+  - '@rolldown/binding-android-arm64@1.2.18'
+  - '@rolldown/binding-darwin-arm64@1.2.18'
+  - '@rolldown/binding-darwin-x64@1.2.18'
+  - '@rolldown/binding-freebsd-x64@1.2.18'
+  - '@rolldown/binding-linux-arm-gnueabihf@1.2.18'
+  - '@rolldown/binding-linux-arm64-gnu@1.2.18'
+  - '@rolldown/binding-linux-arm64-musl@1.2.18'
+  - '@rolldown/binding-linux-ppc64-gnu@1.2.18'
+  - '@rolldown/binding-linux-s390x-gnu@1.2.18'
+  - '@rolldown/binding-linux-x64-gnu@1.2.18'
+  - '@rolldown/binding-linux-x64-musl@1.2.18'
+  - '@rolldown/binding-openharmony-arm64@1.2.18'
+  - '@rolldown/binding-win32-arm64-msvc@1.2.18'
+  - '@rolldown/binding-win32-x64-msvc@1.2.18'
+  - '@vitejs/plugin-react@6.3.0'
+  - miniflare@5.20261109.0-beta
+  - rolldown@1.2.18
+  - vite@8.3.7
+  - workerd@1.20261109.1
+  - wrangler@4.159.0
+
+# Flue 2.3 imports `Type` from pi-ai, which pi-ai 1.5 removed. apps/web stays on Pi 1.5.
+overrides:
+  '@flue/runtime>@earendil-works/pi-ai': 1.4.0
+  '@flue/runtime>@earendil-works/pi-agent-core': 1.4.0

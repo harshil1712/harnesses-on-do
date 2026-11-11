@@ -1,0 +1,22 @@
+{
+	"$schema": "./node_modules/wrangler/config-schema.json",
+	"name": "harnesses-on-do-flue",
+	// Reached only through apps/web's FLUE service binding.
+	"workers_dev": false,
+	"preview_urls": false,
+	"upload_source_maps": true,
+	"compatibility_date": "2026-11-10",
+	// `experimental` is required by the Cloudflare Computer shell's Dynamic Worker.
+	"compatibility_flags": ["nodejs_compat", "experimental"],
+	"ai": { "binding": "AI", "remote": true },
+	"worker_loaders": [{ "binding": "LOADER" }],
+	// Flue generates the agent's Durable Object binding; Metering is ours.
+	"durable_objects": {
+		"bindings": [{ "name": "Metering", "class_name": "Metering" }],
+	},
+	"migrations": [{ "tag": "v1", "new_sqlite_classes": ["FlueAssistantAgent", "Metering"] }],
+	"observability": {
+		"enabled": true,
+		"traces": { "enabled": true },
+	},
+}

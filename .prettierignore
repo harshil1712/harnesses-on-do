@@ -1,0 +1,11 @@
+# Code copied from upstream projects keeps its upstream style (see THIRD_PARTY_NOTICES.md).
+**/upstream/**
+apps/flue/src/sandboxes/cloudflare-computer.ts
+apps/web/codex-kernel/
+
+# Generated
+**/env.d.ts
+**/dist/
+**/.flue-vite/
+.flue-vite.wrangler.jsonc
+pnpm-lock.yaml
